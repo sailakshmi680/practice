@@ -36,14 +36,16 @@ app.post("/create/:tablename", async (req, res) => {
 
 app.get("/getList/:tablename", async (req, res) => {
   const tablename = req.params.tablename;
-  const collection = db.collection(tablename);
   try {
+    const collection = db.collection(tablename);
     const result = await collection.find().toArray();
     res.status(200).json(result);
   } catch (error) {
-    console.log(`ERROR : ${error}`);
+    console.error(`ERROR: ${error}`);
+    res.status(500).json({ error: "An error occurred while fetching data." });
   }
 });
+
 
 app.get("/getDetails/:tableName/:id", async (request, response) => {
   const id = request.params.id;

@@ -14,6 +14,10 @@ client
 
 const db = client.db("royal");
 
+app.get("/", async (req, res) => {
+  res.send("App running")
+});
+
 app.post("/create/:tablename", async (req, res) => {
   const tablename = req.params.tablename;
 
